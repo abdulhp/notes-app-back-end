@@ -1,3 +1,5 @@
+const { nanoid } = require("nanoid");
+
 class NotesService {
     constructor() {
         this._notes = [];
@@ -52,5 +54,15 @@ class NotesService {
             body,
             updatedAt
         };
+    }
+
+    deleteNoteById(id) {
+        const index = this._notes.findIndex((note) => note.id === id);
+
+        if(index === -1) {
+            throw new Error('Catatan gagal dihapus. Id tidak ditemukan');
+        }
+
+        this._notes.splice(index, 1);
     }
 }
