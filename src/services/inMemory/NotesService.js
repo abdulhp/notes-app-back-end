@@ -66,3 +66,5 @@ class NotesService {
         this._notes.splice(index, 1);
     }
 }
+
+module.exports = NotesService;
