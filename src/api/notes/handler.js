@@ -71,7 +71,21 @@ class NotesHandler {
     }
   }
 
-  deleteNoteByIdHandler() {
+  deleteNoteByIdHandler(request, h) {
+    try {
+      const { id } = request.params;
 
+      this._service.deleteNoteByIdHandler(id);
+
+      return {
+        status: 'success',
+        message: 'Catatan berhasil dihapus',
+      };
+    } catch (error) {
+      return h.response({
+        status: 'fail',
+        message: error.message,
+      }).code(404);
+    }
   }
 }
