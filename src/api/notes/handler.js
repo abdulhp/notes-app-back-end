@@ -35,8 +35,22 @@ class NotesHandler {
     };
   }
 
-  getNoteByIdHandler() {
-
+  getNoteByIdHandler(request, h) {
+    try {
+      const { id } = request.params;
+      const note = this._service.getNoteByIdHandler(id);
+      return {
+        status: 'success',
+        data: {
+          note,
+        },
+      };
+    } catch (error) {
+      return h.response({
+        status: 'fail',
+        message: error.message,
+      }).code(404);
+    }
   }
 
   putNoteByIdHandler() {
