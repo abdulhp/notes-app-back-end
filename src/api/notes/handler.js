@@ -26,7 +26,7 @@ class NotesHandler {
         data: {
           noteId,
         },
-      });
+      }).code(201);
     } catch (error) {
       if (error instanceof ClientError) {
         return h.response({
@@ -56,7 +56,8 @@ class NotesHandler {
   getNoteByIdHandler(request, h) {
     try {
       const { id } = request.params;
-      const note = this._service.getNoteByIdHandler(id);
+      const note = this._service.getNoteById(id);
+
       return {
         status: 'success',
         data: {
@@ -109,7 +110,7 @@ class NotesHandler {
     try {
       const { id } = request.params;
 
-      this._service.deleteNoteByIdHandler(id);
+      this._service.deleteNoteById(id);
 
       return {
         status: 'success',
