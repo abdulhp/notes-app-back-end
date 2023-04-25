@@ -53,8 +53,22 @@ class NotesHandler {
     }
   }
 
-  putNoteByIdHandler() {
+  putNoteByIdHandler(request, h) {
+    try {
+      const { id } = request.params;
 
+      this._service.editNoteById(id, request.payload);
+
+      return {
+        status: 'success',
+        message: 'Catatan berhasil di perbarui',
+      };
+    } catch (error) {
+      return h.response({
+        status: 'fail',
+        message: error.message,
+      }).code(404);
+    }
   }
 
   deleteNoteByIdHandler() {
