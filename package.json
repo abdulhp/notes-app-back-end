@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "nodemon server.js",
-    "start-prod": "NODE_ENV=production node ./server.js"
+    "start-prod": "NODE_ENV=production node ./server.js",
+    "lint": "eslint .",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [],
   "author": "",
