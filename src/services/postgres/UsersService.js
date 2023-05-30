@@ -15,9 +15,10 @@ class UsersService {
     await this.verifyNewUsername(username);
 
     const id = `user-${nanoid(16)}`;
-    const hashedPassword = await bcrypt.hash(password, 10);
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(password, hashedPassword);
 
     const query = {
       text: 'insert into users values ($1, $2, $3, $4, $5, $6) returning id',
