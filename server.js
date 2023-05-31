@@ -18,6 +18,10 @@ const AuthenticationValidator = require('./src/validator/authentications');
 const CollaborationsService = require('./src/services/postgres/CollaborationsService');
 const collaborators = require('./src/api/collaborators');
 const CollaborationsValidator = require('./src/validator/collaborations');
+const exportsPlugin = require('./src/api/exports_plugin');
+const ExportValidator = require('./src/validator/exports');
+const ProductService = require('./src/services/rabbitmq/ProducerService');
+const ProducerService = require('./src/services/rabbitmq/ProducerService');
 
 const init = async () => {
   const server = Hapi.server({
@@ -87,6 +91,13 @@ const init = async () => {
         collaborationsService,
         notesService,
         validator: CollaborationsValidator,
+      },
+    },
+    {
+      plugin: exportsPlugin,
+      options: {
+        service: ProducerService,
+        validator: ExportValidator,
       },
     },
   ]);
